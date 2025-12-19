@@ -1,4 +1,4 @@
-FROM maven:3.8.6-openjdk-17 AS build
+FROM maven:3.8-openjdk-17 AS build
 
 # Copy source code
 COPY . /app
