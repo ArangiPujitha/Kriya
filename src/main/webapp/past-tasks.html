@@ -1,0 +1,44 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.todo.model.Task" %>
+<%
+    List<Task> tasks = (List<Task>) request.getAttribute("tasks");
+%>
+<html>
+<head>
+    <title>Past Tasks</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>View Tasks by Date</h1>
+    <a href="index.html" class="btn-secondary back">Back to Home</a>
+    <form action="pastTasks" method="get" class="form-card">
+        <label for="date">Select Date:</label>
+        <input type="date" id="date" name="date" required>
+        <button type="submit" class="btn-primary">View Tasks</button>
+    </form>
+</form>
+<br>
+<% if(tasks != null) { %>
+<table border="1" cellpadding="5">
+<tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Status</th>
+</tr>
+<% for(Task task : tasks) { %>
+<tr>
+    <td><%= task.getTitle() %></td>
+    <td><%= task.getDescription() %></td>
+    <td><%= task.getTaskDate() %></td>
+    <td><%= task.getTaskTime() %></td>
+    <td><%= task.getStatus() %></td>
+</tr>
+<% } %>
+</table>
+<% } %>
+</body>
+</html>
+

@@ -1,0 +1,52 @@
+<%@ page import="com.todo.model.Task, java.util.List" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pending Tasks</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Pending Tasks</h1>
+
+    <table class="task-table">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    <%
+        List<Task> tasks = (List<Task>) request.getAttribute("tasks");
+        if (tasks != null) {
+            for (Task task : tasks) {
+    %>
+    <tr>
+        <td><%= task.getTitle() %></td>
+        <td><%= task.getDescription() %></td>
+        <td><%= task.getTaskDate() %></td>
+        <td><%= task.getTaskTime() %></td>
+        <td><%= task.getStatus() %></td>
+        <td>
+            <form action="ToggleStatusServlet" method="post" style="display:inline;">
+                <input type="hidden" name="taskId" value="<%= task.getId() %>">
+                <button type="submit"><%= "Completed".equals(task.getStatus()) ? "Mark Pending" : "Mark Completed" %></button>
+            </form>
+            <form action="deleteTask" method="post" style="display:inline;">
+                <input type="hidden" name="taskId" value="<%= task.getId() %>">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    <%
+            }
+        }
+    %>
+</table>
+
+<a href="index.html" class="btn-secondary back">Back to Home</a>
+</div>
+</body>
+</html>
