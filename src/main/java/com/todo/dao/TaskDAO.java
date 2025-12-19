@@ -19,28 +19,31 @@ public class TaskDAO {
 
     /* ================= ADD TASK ================= */
     public void addTask(Task task) throws SQLException {
-        String sql = "INSERT INTO tasks (title, description, task_date, task_time, status) VALUES (?, ?, ?, ?, 'Pending')";
+        String sql = "INSERT INTO tasks (title, description, task_date, task_time, status, user_id) VALUES (?, ?, ?, ?, 'Pending', ?)";
 
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, task.getTitle());
             ps.setString(2, task.getDescription());
-            ps.setDate(3, Date.valueOf(task.getTaskDate()));   // LocalDate → SQL Date
-            ps.setTime(4, Time.valueOf(task.getTaskTime()));   // LocalTime → SQL Time
+            ps.setDate(3, Date.valueOf(task.getTaskDate()));
+            ps.setTime(4, Time.valueOf(task.getTaskTime()));
+            ps.setInt(5, task.getUserId());
 
             ps.executeUpdate();
         }
     }
 
     /* ================= GET PENDING TASKS ================= */
-    public List<Task> getPendingTasks() throws SQLException {
+    public List<Task> getPendingTasks(int userId) throws SQLException {
         List<Task> tasks = new ArrayList<>();
-        String sql = "SELECT * FROM tasks WHERE status='Pending' ORDER BY task_date, task_time";
+        String sql = "SELECT * FROM tasks WHERE status='Pending' AND user_id=? ORDER BY task_date, task_time";
 
         try (Connection conn = DBUtil.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 tasks.add(extractTask(rs));
@@ -122,14 +125,15 @@ public class TaskDAO {
     }
 
     /* ================= GET TASKS BY DATE (PAST TASKS) ================= */
-    public List<Task> getTasksByDate(LocalDate date) throws SQLException {
+    public List<Task> getTasksByDate(LocalDate date, int userId) throws SQLException {
         List<Task> tasks = new ArrayList<>();
-        String sql = "SELECT * FROM tasks WHERE task_date=? ORDER BY task_time";
+        String sql = "SELECT * FROM tasks WHERE task_date=? AND user_id=? ORDER BY task_time";
 
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setDate(1, Date.valueOf(date));
+            ps.setInt(2, userId);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -149,6 +153,7 @@ public class TaskDAO {
         task.setTaskDate(rs.getDate("task_date").toLocalDate());
         task.setTaskTime(rs.getTime("task_time").toLocalTime());
         task.setStatus(rs.getString("status"));
+        task.setUserId(rs.getInt("user_id"));
 
         return task;
     }

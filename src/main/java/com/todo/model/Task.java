@@ -10,6 +10,7 @@ public class Task {
     private LocalDate taskDate;
     private LocalTime taskTime;
     private String status;
+    private int userId;
 
     public Task() {}
 
@@ -34,4 +35,6 @@ public class Task {
     public void setTaskTime(LocalTime taskTime) { this.taskTime = taskTime; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    public int getUserId() { return userId; }
+    public void setUserId(int userId) { this.userId = userId; }
 }
