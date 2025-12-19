@@ -3,8 +3,6 @@ services:
     name: todo-webapp
     env: docker
     dockerfilePath: ./Dockerfile
-    buildCommand: mvn clean package
-    startCommand: catalina.sh run
     envVars:
       - key: DATABASE_URL
         sync: false
