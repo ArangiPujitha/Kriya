@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class DBUtil {
 
-    private static final String URL = "jdbc:postgresql://ep-empty-firefly-ah4ulx9t-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require&channelBinding=require";
-    private static final String USER = "neondb_owner";
-    private static final String PASSWORD = "npg_z1iEUXoA5PRe";
+    private static final String URL = System.getenv().getOrDefault("DATABASE_URL", "jdbc:postgresql://localhost:5432/todo_db");
+    private static final String USER = System.getenv().getOrDefault("DATABASE_USER", "postgres");
+    private static final String PASSWORD = System.getenv().getOrDefault("DATABASE_PASSWORD", "password");
 
     public static Connection getConnection() throws SQLException {
         try {

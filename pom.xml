@@ -25,6 +25,13 @@
             <version>42.7.3</version>
         </dependency>
 
+        <!-- MySQL Connector -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+
         <!-- Servlet API -->
         <!-- Servlet API for Tomcat 9 (javax.servlet) -->
 <dependency>
