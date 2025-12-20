@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/ToggleStatusServlet")
+@WebServlet("/toggleStatus")
 public class ToggleStatusServlet extends HttpServlet {
 
     private TaskDAO taskDAO = new TaskDAO();
@@ -20,7 +20,7 @@ public class ToggleStatusServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            int id = Integer.parseInt(request.getParameter("taskId"));
+            int id = Integer.parseInt(request.getParameter("id"));
 
             // Get current task from DB
             Task task = taskDAO.getTaskById(id);

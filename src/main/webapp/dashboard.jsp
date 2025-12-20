@@ -13,14 +13,40 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Welcome, <%= user.getUsername() %>!</h2>
-        
-        <div class="menu">
-            <a href="listTasks">View My Tasks</a> |
-            <a href="add-task-auth.jsp">Add New Task</a> |
-            <a href="pastTasks">Past Tasks</a> |
+    <nav class="navbar">
+        <a href="dashboard.jsp" class="logo">TODO</a>
+        <div class="nav-links">
+            <a href="listTasks">View Tasks</a>
+            <a href="add-task-auth.jsp">Add New Task</a>
+            <a href="pastTasks">Past Tasks</a>
             <a href="logout">Logout</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="dashboard-welcome">
+            <h2>Welcome, <%= user.getUsername() %>!</h2>
+            <p>Manage your tasks efficiently and stay productive.</p>
+        </div>
+        
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <h3>📝</h3>
+                <p>Quick Add Task</p>
+                <a href="add-task-auth.jsp" class="btn-primary">Add Task</a>
+            </div>
+            
+            <div class="stat-card">
+                <h3>📋</h3>
+                <p>View All Tasks</p>
+                <a href="listTasks" class="btn-secondary">View Tasks</a>
+            </div>
+            
+            <div class="stat-card">
+                <h3>📅</h3>
+                <p>Past Tasks</p>
+                <a href="pastTasks" class="btn-accent">Past Tasks</a>
+            </div>
         </div>
     </div>
 </body>

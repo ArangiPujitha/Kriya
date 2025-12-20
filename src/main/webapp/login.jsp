@@ -6,7 +6,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>Login</h2>
+        <h2>Login to Your Account</h2>
         
         <% if (request.getAttribute("error") != null) { %>
             <div class="error"><%= request.getAttribute("error") %></div>
@@ -19,18 +19,21 @@
         <form action="login" method="post">
             <div class="form-group">
                 <label>Email:</label>
-                <input type="email" name="email" required>
+                <input type="email" name="email" required placeholder="Enter your email">
             </div>
             
             <div class="form-group">
                 <label>Password:</label>
-                <input type="password" name="password" required>
+                <input type="password" name="password" required placeholder="Enter your password">
             </div>
             
-            <button type="submit">Login</button>
+            <button type="submit" class="btn-primary">Login</button>
         </form>
         
-        <p>Don't have an account? <a href="register">Register here</a></p>
+        <div style="text-align: center; margin-top: 2rem;">
+            <p>Don't have an account? <a href="register" style="color: #667eea; font-weight: 600;">Register here</a></p>
+            <p><a href="index.html" style="color: #667eea;">Back to Home</a></p>
+        </div>
     </div>
 </body>
 </html>
