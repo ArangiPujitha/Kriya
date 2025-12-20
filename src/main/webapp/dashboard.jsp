@@ -31,19 +31,19 @@
         
         <div class="dashboard-stats">
             <div class="stat-card">
-                <h3>📝</h3>
+                <h3>Tasks</h3>
                 <p>Quick Add Task</p>
                 <a href="add-task-auth.jsp" class="btn-primary">Add Task</a>
             </div>
             
             <div class="stat-card">
-                <h3>📋</h3>
+                <h3>View</h3>
                 <p>View All Tasks</p>
                 <a href="listTasks" class="btn-secondary">View Tasks</a>
             </div>
             
             <div class="stat-card">
-                <h3>📅</h3>
+                <h3>History</h3>
                 <p>Past Tasks</p>
                 <a href="pastTasks" class="btn-accent">Past Tasks</a>
             </div>
